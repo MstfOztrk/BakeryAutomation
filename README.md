@@ -4,49 +4,49 @@
   <img src="BakeryAutomation/Resources/Images/logo.png" alt="BakeryAutomation logo" width="180" />
 </p>
 
-Windows masaustu (WPF) ve SQLite tabanli firin otomasyonu. Urun, cari, sevkiyat, iade, tahsilat ve raporlama sureclerini tek uygulamada yonetmek icin gelistirildi.
+BakeryAutomation is a Windows desktop application built with WPF and SQLite for managing bakery operations in a single place. It covers products, customer accounts, shipments, returns, payments, and reporting.
 
-## Ozellikler
-- Urunler: ekle, sil, guncelle, fiyat gecmisi
-- Subeler / cariler: kart, vade bilgisi, kredi limiti, subeye ozel fiyat
-- Sevkiyat: batch bazli gonderim, ayni fis iadesi, zayi, urun ve batch iskonto
-- Iadeler: sonradan gelen urunler icin ayri iade fisi, sevkiyata bagli veya bagimsiz iade
-- Tahsilat: sube bazli odeme girisi, fise bagli kalan tutar kontrolu
-- Raporlar: gunluk ozet, cari ekstre, devreden bakiye, CSV export
-- Ayarlar: veri dosyasi konumu, yedekle, geri yukle
+## Features
+- Products: create, update, delete, and track price history
+- Branches / customer accounts: manage account cards, due days, credit limits, and branch-specific pricing
+- Shipments: batch-based delivery entries, same-receipt returns, waste tracking, and product or batch discounts
+- Returns: create separate return receipts for later returns, either linked to a shipment or entered independently
+- Payments: record branch-based payments and validate remaining balances for linked receipts
+- Reports: daily summary, account statement, carried balance, and CSV export
+- Settings: configure data file location, create backups, and restore backups
 
-## Teknoloji
+## Tech Stack
 - .NET 8
 - WPF
 - SQLite
 - xUnit
 
-## Kurulum
-1. Windows'ta Visual Studio 2022 ile `BakeryAutomationApp.sln` ac.
-2. Build Configuration olarak `Release` sec.
-3. Build / Run.
+## Getting Started
+1. Open `BakeryAutomationApp.sln` in Visual Studio 2022 on Windows.
+2. Select the `Release` build configuration.
+3. Build and run the application.
 
 ## Publish
-Standart release cikisi icin hazir profil:
+The project includes a publish profile for the standard release output:
 
 ```powershell
 dotnet publish BakeryAutomation\BakeryAutomation.csproj -c Release /p:PublishProfile=WinX64
 ```
 
-Varsayilan publish klasoru:
+Default publish folder:
 `BakeryAutomation\bin\Release\net8.0-windows\publish\win-x64\`
 
-Release oncesi kontrol listesi:
+Pre-release checklist:
 `docs/RELEASE_CHECKLIST.md`
 
-## Veri
-Uygulama veriyi su dosyada tutar:
+## Data
+The application stores its database in:
 `%AppData%\BakeryAutomation\bakery.db`
 
-Ek ayar dosyasi:
+Additional settings file:
 `%AppData%\BakeryAutomation\settings.json`
 
-## Notlar
-- Veritabani olarak SQLite kullanilir.
-- Para birimi alanlari `decimal`.
-- Iskonto alanlari yuzde (`%`) olarak tutulur.
+## Notes
+- SQLite is used as the local database.
+- Currency fields are stored as `decimal`.
+- Discount fields are stored as percentages (`%`).
