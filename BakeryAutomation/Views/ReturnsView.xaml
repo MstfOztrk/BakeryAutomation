@@ -1,0 +1,248 @@
+<UserControl x:Class="BakeryAutomation.Views.ReturnsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:services="clr-namespace:BakeryAutomation.Services">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="0,0,0,12">
+            <TextBlock Text="Iadeler" FontSize="22" FontWeight="SemiBold" />
+            <TextBlock Text="Sonradan gelen iadeleri buradan kaydedin."
+                       Foreground="{DynamicResource TextMutedBrush}"
+                       Margin="0,4,0,0" />
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="360" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="390" />
+            </Grid.ColumnDefinitions>
+
+            <Border Style="{StaticResource CardBorder}" Margin="0,0,12,0">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Margin="0,0,0,8">
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0" Style="{StaticResource PrimaryButton}" Command="{Binding NewReceiptCommand}" Content="Yeni Iade" />
+                            <Button Grid.Column="2" Style="{StaticResource SecondaryButton}" Command="{Binding RefreshCommand}" Content="Yenile" />
+                        </Grid>
+
+                        <Border Background="{DynamicResource BackgroundBrush}" CornerRadius="4" Padding="4">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="30" />
+                                </Grid.ColumnDefinitions>
+                                <Button services:CommandButtonFeedback.IsEnabled="False" Command="{Binding PreviousDayCommand}" Content="&lt;" Style="{StaticResource SecondaryButton}" Padding="0" Height="24" />
+                                <DatePicker Grid.Column="1" SelectedDate="{Binding FilterDate}" Margin="4,0" BorderThickness="0" Background="Transparent" />
+                                <Button Grid.Column="2" services:CommandButtonFeedback.IsEnabled="False" Command="{Binding NextDayCommand}" Content="&gt;" Style="{StaticResource SecondaryButton}" Padding="0" Height="24" />
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+
+                    <ListBox ItemsSource="{Binding Receipts}" SelectedItem="{Binding SelectedRow}" DisplayMemberPath="Display" BorderThickness="0">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                                <Setter Property="Padding" Value="10" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="Margin" Value="0,0,0,4" />
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Column="1" Style="{StaticResource CardBorder}" Margin="0,0,12,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Margin="0,0,0,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0" Style="{StaticResource PrimaryButton}" Command="{Binding SaveReceiptCommand}" Content="Kaydet" />
+                        <Button Grid.Column="2" Style="{StaticResource DangerButton}" Command="{Binding DeleteReceiptCommand}" Content="Sil" />
+                    </Grid>
+
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Urun" Binding="{Binding ProductName}" Width="*" />
+                            <DataGridTextColumn Header="Kaynak Fis" Binding="{Binding SourceShipmentDisplay}" Width="140" />
+                            <DataGridTextColumn Header="Birim" Binding="{Binding UnitTypeDisplay}" Width="80" />
+                            <DataGridTextColumn Header="Miktar" Binding="{Binding Quantity, StringFormat={}{0:G29}}" Width="90" />
+                            <DataGridTextColumn Header="Birim Fiyat" Binding="{Binding UnitPrice, StringFormat={}{0:n2}}" Width="110" />
+                            <DataGridTextColumn Header="Tutar" Binding="{Binding TotalLinePrice, StringFormat={}{0:n2}}" Width="110" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Border Grid.Row="2" Background="{DynamicResource BackgroundBrush}" CornerRadius="8" Padding="15" Margin="0,10,0,10">
+                        <DockPanel>
+                            <TextBlock Text="Toplam Iade" Foreground="{DynamicResource TextMutedBrush}" VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding ReceiptTotal, StringFormat={}{0:n2}}" FontSize="18" FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Right" />
+                        </DockPanel>
+                    </Border>
+
+                    <TextBlock Grid.Row="3"
+                               Text="{Binding SelectedItemStatusText}"
+                               Foreground="{DynamicResource TextMutedBrush}"
+                               TextWrapping="Wrap"
+                               Margin="0,0,0,10" />
+
+                    <Button Grid.Row="4"
+                            Style="{StaticResource DangerButton}"
+                            Command="{Binding RemoveItemCommand}"
+                            Content="{Binding RemoveItemButtonText}"
+                            Width="220"
+                            HorizontalAlignment="Left" />
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="2" Style="{StaticResource CardBorder}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="Iade Fisi" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10" />
+
+                        <Border Background="{DynamicResource BackgroundBrush}" CornerRadius="10" Padding="12" Margin="0,0,0,12">
+                            <StackPanel>
+                                <TextBlock Text="{Binding FormModeTitle}" FontWeight="SemiBold" />
+                                <TextBlock Text="{Binding FormModeHint}"
+                                           Foreground="{DynamicResource TextMutedBrush}"
+                                           Margin="0,6,0,0"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Border>
+
+                        <TextBlock Text="Iade No" Foreground="{DynamicResource TextMutedBrush}" />
+                        <TextBox Text="{Binding ReturnNo, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Tarih" Foreground="{DynamicResource TextMutedBrush}" />
+                        <DatePicker SelectedDate="{Binding Date}" />
+
+                        <TextBlock Text="Sube" Foreground="{DynamicResource TextMutedBrush}" />
+                        <ComboBox ItemsSource="{Binding Branches}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding BranchId}" />
+
+                        <TextBlock Text="Not" Foreground="{DynamicResource TextMutedBrush}" />
+                        <TextBox Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" Height="78" />
+
+                        <Border Background="{DynamicResource BackgroundBrush}" CornerRadius="10" Padding="12" Margin="0,0,0,12">
+                            <StackPanel>
+                                <TextBlock Text="{Binding ReturnModeText}" FontWeight="SemiBold" />
+                                <TextBlock Text="{Binding ReturnModeHint}"
+                                           Foreground="{DynamicResource TextMutedBrush}"
+                                           Margin="0,6,0,0"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Border>
+
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0"
+                                    services:CommandButtonFeedback.IsEnabled="False"
+                                    Command="{Binding SourceBoundModeCommand}"
+                                    Content="Fise Bagli Iade">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource SecondaryButton}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsSourceBoundMode}" Value="True">
+                                                <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+                                                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                                                <Setter Property="Foreground" Value="White" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
+                            <Button Grid.Column="2"
+                                    services:CommandButtonFeedback.IsEnabled="False"
+                                    Command="{Binding FreeReturnModeCommand}"
+                                    Content="Serbest Iade">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource SecondaryButton}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsFreeReturnMode}" Value="True">
+                                                <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+                                                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                                                <Setter Property="Foreground" Value="White" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </Grid>
+
+                        <Separator Margin="0,12,0,12" />
+                        <TextBlock Text="Iade Satiri Ekle" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,6" />
+                        <TextBlock Text="{Binding ReturnModeHint}"
+                                   Foreground="{DynamicResource TextMutedBrush}"
+                                   Margin="0,0,0,10"
+                                    TextWrapping="Wrap" />
+
+                        <StackPanel>
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSourceBoundMode}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Style>
+
+                            <TextBlock Text="Kaynak Sevkiyat" Foreground="{DynamicResource TextMutedBrush}" />
+                            <ComboBox ItemsSource="{Binding SourceShipments}" DisplayMemberPath="Display" SelectedValuePath="Id" SelectedValue="{Binding SelectedSourceShipmentId}" />
+
+                            <TextBlock Text="Kaynak Sevkiyat Satiri" Foreground="{DynamicResource TextMutedBrush}" />
+                            <ComboBox ItemsSource="{Binding SourceShipmentItems}" DisplayMemberPath="Display" SelectedValuePath="ShipmentItemId" SelectedValue="{Binding SelectedSourceShipmentItemId}" IsEnabled="{Binding HasSelectedSourceShipment}" />
+                        </StackPanel>
+
+                        <TextBlock Text="{Binding ProductSelectorLabel}" Foreground="{DynamicResource TextMutedBrush}" />
+                        <ComboBox ItemsSource="{Binding Products}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding NewProductId}" IsEnabled="{Binding IsManualSourceMode}" />
+
+                        <TextBlock Text="Miktar" Foreground="{DynamicResource TextMutedBrush}" />
+                        <TextBox Text="{Binding NewQuantity, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Birim" Foreground="{DynamicResource TextMutedBrush}" />
+                        <TextBox Text="{Binding NewUnitTypeDisplay}" IsReadOnly="True" />
+
+                        <TextBlock Text="Birim Fiyat" Foreground="{DynamicResource TextMutedBrush}" />
+                        <TextBox Text="{Binding NewUnitPrice, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsManualSourceMode}" />
+
+                        <Border Background="{DynamicResource BackgroundBrush}" CornerRadius="8" Padding="10" Margin="0,8,0,10">
+                            <TextBlock Text="{Binding SourceAvailabilityText}"
+                                       Foreground="{DynamicResource TextMutedBrush}" />
+                        </Border>
+
+                        <Button Style="{StaticResource PrimaryButton}" Command="{Binding AddItemCommand}" Content="{Binding AddItemButtonText}" />
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

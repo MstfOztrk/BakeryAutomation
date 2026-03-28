@@ -1,0 +1,33 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Dark Palette -->
+    <Color x:Key="C_Background">#FF111827</Color>
+    <Color x:Key="C_Surface">#FF1F2937</Color>
+    <Color x:Key="C_Sidebar">#FF000000</Color> 
+    <Color x:Key="C_SidebarHover">#FF374151</Color>
+    <Color x:Key="C_SidebarSelected">#FF4B5563</Color>
+    <Color x:Key="C_Accent">#FF3B82F6</Color>
+    <Color x:Key="C_Text">#FFF9FAFB</Color>
+    <Color x:Key="C_TextMuted">#FF9CA3AF</Color>
+    <Color x:Key="C_Border">#FF374151</Color>
+    <Color x:Key="C_Danger">#FFEF4444</Color>
+    <Color x:Key="C_Success">#FF22C55E</Color>
+    <Color x:Key="C_ButtonHover">#FF4B5563</Color>
+    <Color x:Key="C_SecondaryButton">#FF374151</Color>
+
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource C_Background}" />
+    <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource C_Surface}" />
+    <SolidColorBrush x:Key="SidebarBrush" Color="{StaticResource C_Sidebar}" />
+    <SolidColorBrush x:Key="SidebarHoverBrush" Color="{StaticResource C_SidebarHover}" />
+    <SolidColorBrush x:Key="SidebarSelectedBrush" Color="{StaticResource C_SidebarSelected}" />
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource C_Accent}" />
+    <SolidColorBrush x:Key="TextBrush" Color="{StaticResource C_Text}" />
+    <SolidColorBrush x:Key="TextMutedBrush" Color="{StaticResource C_TextMuted}" />
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource C_Border}" />
+    <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource C_Danger}" />
+    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource C_Success}" />
+    <SolidColorBrush x:Key="ButtonHoverBrush" Color="{StaticResource C_ButtonHover}" />
+    <SolidColorBrush x:Key="SecondaryButtonBrush" Color="{StaticResource C_SecondaryButton}" />
+
+</ResourceDictionary>

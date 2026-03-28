@@ -1,0 +1,220 @@
+<UserControl x:Class="BakeryAutomation.Views.BranchesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:services="clr-namespace:BakeryAutomation.Services">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="0,0,0,12">
+            <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[BranchesTitle]}" FontSize="22" FontWeight="SemiBold" />
+            <TextBlock Text="Cari kartlari ve ozel fiyatlari buradan yonetin."
+                       Foreground="{DynamicResource TextMutedBrush}"
+                       Margin="0,4,0,0" />
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="560" />
+            </Grid.ColumnDefinitions>
+
+            <Border Style="{StaticResource CardBorder}" Margin="0,0,12,0">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+                        <Button Style="{StaticResource SecondaryButton}" Command="{Binding RefreshCommand}" Content="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Refresh]}" Width="120" Margin="0,0,10,0" />
+                    </StackPanel>
+
+                    <DataGrid ItemsSource="{Binding Branches}" SelectedItem="{Binding SelectedRow}" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Branch]}" Binding="{Binding Name}" Width="*" />
+                            <DataGridTextColumn Header="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Type]}" Binding="{Binding TypeDisplay}" Width="120" />
+                            <DataGridTextColumn Header="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Phone]}" Binding="{Binding Phone}" Width="130" />
+                            <DataGridTextColumn Header="Bakiye" Binding="{Binding Balance, StringFormat={}{0:n2}}" Width="120" />
+                            <DataGridTextColumn Header="Vade" Binding="{Binding TermsSummary}" Width="140" />
+                            <DataGridTextColumn Header="Kredi" Binding="{Binding CreditStatus}" Width="130" />
+                            <DataGridTextColumn Header="Sonraki Tahsilat" Binding="{Binding NextCollectionDateText}" Width="130" />
+                            <DataGridCheckBoxColumn Header="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Active]}" Binding="{Binding IsActive, Mode=OneWay}" Width="60" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Column="1" Style="{StaticResource CardBorder}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="Cari Karti" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10" />
+
+                        <Border Background="{DynamicResource BackgroundBrush}" CornerRadius="10" Padding="12" Margin="0,0,0,12">
+                            <TextBlock Text="Hareketli kayitlar silinmez, pasif yapilir."
+                                       Foreground="{DynamicResource TextMutedBrush}"
+                                       TextWrapping="Wrap" />
+                        </Border>
+
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="150" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="{Binding FormModeTitle}" FontSize="15" FontWeight="SemiBold" />
+                                <TextBlock Text="{Binding FormModeHint}"
+                                           Foreground="{DynamicResource TextMutedBrush}"
+                                           TextWrapping="Wrap"
+                                           Margin="0,4,0,0" />
+                            </StackPanel>
+
+                            <Button Grid.Column="2"
+                                    Style="{StaticResource SecondaryButton}"
+                                    Command="{Binding NewCommand}"
+                                    Content="Yeni Kayit" />
+                        </Grid>
+
+                        <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Branch]}" Foreground="{DynamicResource TextMutedBrush}" />
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Type]}" Foreground="{DynamicResource TextMutedBrush}" />
+                        <ComboBox ItemsSource="{Binding BranchTypes}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding Type}" />
+
+                        <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Address]}" Foreground="{DynamicResource TextMutedBrush}" />
+                        <TextBox Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" Height="72" />
+
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Contact]}" Foreground="{DynamicResource TextMutedBrush}" />
+                                <TextBox Text="{Binding ContactName, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Phone]}" Foreground="{DynamicResource TextMutedBrush}" />
+                                <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Vade" Foreground="{DynamicResource TextMutedBrush}" />
+                                <TextBox Text="{Binding PaymentTerms, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="Tahsilat Gunu" Foreground="{DynamicResource TextMutedBrush}" />
+                                <TextBox Text="{Binding PaymentDayOfMonth, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="4">
+                                <TextBlock Text="Kredi Limiti" Foreground="{DynamicResource TextMutedBrush}" />
+                                <TextBox Text="{Binding CreditLimit, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+                        </Grid>
+
+                        <CheckBox Content="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Active]}" IsChecked="{Binding IsActive}" Margin="0,0,0,10" />
+
+                        <Grid Margin="0,0,0,14">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0"
+                                    Style="{StaticResource SecondaryButton}"
+                                    Command="{Binding ViewStatementCommand}"
+                                    Content="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[ViewStatement]}" />
+                            <Button Grid.Column="2"
+                                    Style="{StaticResource SecondaryButton}"
+                                    Command="{Binding OpenCollectionsCommand}"
+                                    Content="Tahsilata Git" />
+                            <Button Grid.Column="4"
+                                    Style="{StaticResource PrimaryButton}"
+                                    Command="{Binding SaveCommand}"
+                                    Content="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Save]}" />
+                        </Grid>
+
+                        <Separator Margin="0,4,0,12" />
+
+                        <TextBlock Text="Ozel Fiyatlar" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,6" />
+                        <TextBlock Text="Bu fiyat sadece secili cari icin gecerlidir."
+                                   Foreground="{DynamicResource TextMutedBrush}"
+                                   Margin="0,0,0,4" />
+                        <TextBlock Text="{Binding SelectedBranchSummary}"
+                                   Foreground="{DynamicResource TextMutedBrush}"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,10" />
+
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="160" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Urun" Foreground="{DynamicResource TextMutedBrush}" />
+                                <ComboBox ItemsSource="{Binding Products}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding OverrideProductId}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="Birim Fiyat" Foreground="{DynamicResource TextMutedBrush}" />
+                                <TextBox Text="{Binding OverrideUnitPrice, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Margin="0,4,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0" Style="{StaticResource SecondaryButton}" Command="{Binding AddOrUpdateOverrideCommand}" Content="Ozel Fiyati Kaydet" />
+                            <Button Grid.Column="2" Style="{StaticResource DangerButton}" Command="{Binding RemoveOverrideCommand}" Content="Seciliyi Kaldir" />
+                        </Grid>
+
+                        <DataGrid ItemsSource="{Binding Overrides}" SelectedItem="{Binding SelectedOverride}" AutoGenerateColumns="False" Height="190" Margin="0,0,0,10">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Urun" Binding="{Binding ProductName}" Width="*" />
+                                <DataGridTextColumn Header="Birim Fiyat" Binding="{Binding UnitPrice, StringFormat={}{0:n2}}" Width="120" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Grid Margin="0,6,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0" Style="{StaticResource SecondaryButton}" Command="{Binding NewCommand}" Content="Temizle / Yeni" />
+                            <Button Grid.Column="2" Style="{StaticResource PrimaryButton}" Command="{Binding SaveCommand}" Content="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Save]}" />
+                            <Button Grid.Column="4" Style="{StaticResource DangerButton}" Command="{Binding DeleteCommand}" Content="Sil veya Pasif Yap" />
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

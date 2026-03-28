@@ -1,0 +1,75 @@
+<UserControl x:Class="BakeryAutomation.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Genel Bakis" FontSize="22" FontWeight="SemiBold" Margin="0,0,0,4" />
+            <TextBlock Text="Bugunun ozetini buradan izleyin."
+                       Foreground="{DynamicResource TextMutedBrush}"
+                       Margin="0,0,0,12" />
+
+            <UniformGrid Columns="5" Margin="0,0,0,12">
+                <Border Style="{StaticResource CardBorder}" Margin="0,0,10,0">
+                    <StackPanel>
+                        <TextBlock Text="Bugunki Sevkiyat" Foreground="{DynamicResource TextMutedBrush}" />
+                        <TextBlock Text="{Binding TodayShipmentCount}" FontSize="24" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardBorder}" Margin="0,0,10,0">
+                    <StackPanel>
+                        <TextBlock Text="Bugun Net Ciro" Foreground="{DynamicResource TextMutedBrush}" />
+                        <TextBlock Text="{Binding TodayNetRevenue, StringFormat={}{0:n2}}" FontSize="24" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardBorder}" Margin="0,0,10,0">
+                    <StackPanel>
+                        <TextBlock Text="Toplam Alacak" Foreground="{DynamicResource TextMutedBrush}" />
+                        <TextBlock Text="{Binding TotalReceivable, StringFormat={}{0:n2}}" FontSize="24" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardBorder}" Margin="0,0,10,0">
+                    <StackPanel>
+                        <TextBlock Text="Aktif Cari" Foreground="{DynamicResource TextMutedBrush}" />
+                        <TextBlock Text="{Binding ActiveBranches}" FontSize="24" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Aktif Urun" Foreground="{DynamicResource TextMutedBrush}" />
+                        <TextBlock Text="{Binding ActiveProducts}" FontSize="24" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+
+            <Border Style="{StaticResource CardBorder}">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Margin="0,0,0,10">
+                        <TextBlock Text="En Borclu Cariler" FontSize="16" FontWeight="SemiBold" />
+                        <TextBlock Text="Bakiyesi yuksek carileri hizlica gorun."
+                                   Foreground="{DynamicResource TextMutedBrush}"
+                                   Margin="0,4,0,0" />
+                    </StackPanel>
+
+                    <Button DockPanel.Dock="Top"
+                            Style="{StaticResource SecondaryButton}"
+                            Command="{Binding RefreshCommand}"
+                            Content="Yenile"
+                            Width="120"
+                            HorizontalAlignment="Left" />
+
+                    <DataGrid ItemsSource="{Binding TopDebtors}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Cari" Binding="{Binding BranchName}" Width="*" />
+                            <DataGridTextColumn Header="Bakiye" Binding="{Binding Balance, StringFormat={}{0:n2}}" Width="160" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

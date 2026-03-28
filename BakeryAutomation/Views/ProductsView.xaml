@@ -1,0 +1,109 @@
+<UserControl x:Class="BakeryAutomation.Views.ProductsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="0,0,0,12">
+            <TextBlock Text="Urunler" FontSize="22" FontWeight="SemiBold" />
+            <TextBlock Text="Urun kartlarini ve fiyatlarini buradan yonetin."
+                       Foreground="{DynamicResource TextMutedBrush}"
+                       Margin="0,4,0,0" />
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="440" />
+            </Grid.ColumnDefinitions>
+
+            <Border Style="{StaticResource CardBorder}" Margin="0,0,12,0">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+                        <Button Style="{StaticResource SecondaryButton}" Command="{Binding RefreshCommand}" Content="Yenile" Width="120" Margin="0,0,10,0" />
+                    </StackPanel>
+
+                    <DataGrid ItemsSource="{Binding Products}" SelectedItem="{Binding Selected}" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Ad" Binding="{Binding Name}" Width="*" />
+                            <DataGridTextColumn Header="Kategori" Binding="{Binding Category}" Width="160" />
+                            <DataGridTextColumn Header="Birim" Binding="{Binding UnitTypeDisplay, Mode=OneWay}" Width="90" />
+                            <DataGridTextColumn Header="Fiyat" Binding="{Binding DefaultUnitPrice, StringFormat={}{0:n2}}" Width="120" />
+                            <DataGridCheckBoxColumn Header="Aktif" Binding="{Binding IsActive}" Width="60" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Column="1" Style="{StaticResource CardBorder}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="Urun Karti" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10" />
+
+                        <Border Background="{DynamicResource BackgroundBrush}" CornerRadius="10" Padding="12" Margin="0,0,0,12">
+                            <TextBlock Text="Hareketli urunler silinmez, pasif yapilir."
+                                       Foreground="{DynamicResource TextMutedBrush}"
+                                       TextWrapping="Wrap" />
+                        </Border>
+
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="150" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="{Binding FormModeTitle}" FontSize="15" FontWeight="SemiBold" />
+                                <TextBlock Text="{Binding FormModeHint}"
+                                           Foreground="{DynamicResource TextMutedBrush}"
+                                           TextWrapping="Wrap"
+                                           Margin="0,4,0,0" />
+                            </StackPanel>
+
+                            <Button Grid.Column="2"
+                                    Style="{StaticResource SecondaryButton}"
+                                    Command="{Binding NewCommand}"
+                                    Content="Yeni Kayit" />
+                        </Grid>
+
+                        <TextBlock Text="Ad" Foreground="{DynamicResource TextMutedBrush}" />
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Kategori" Foreground="{DynamicResource TextMutedBrush}" />
+                        <TextBox Text="{Binding Category, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Birim" Foreground="{DynamicResource TextMutedBrush}" />
+                        <ComboBox ItemsSource="{Binding UnitTypes}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding UnitType}" />
+
+                        <TextBlock Text="Liste Fiyati" Foreground="{DynamicResource TextMutedBrush}" />
+                        <TextBox Text="{Binding DefaultUnitPrice, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8" />
+
+                        <CheckBox Content="Aktif" IsChecked="{Binding IsActive}" Margin="0,0,0,8" />
+
+                        <TextBlock Text="Fiyat Notu" Foreground="{DynamicResource TextMutedBrush}" />
+                        <TextBox Text="{Binding PriceNote, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" Height="84" />
+
+                        <Grid Margin="0,6,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0" Style="{StaticResource SecondaryButton}" Command="{Binding NewCommand}" Content="Temizle / Yeni" />
+                            <Button Grid.Column="2" Style="{StaticResource PrimaryButton}" Command="{Binding SaveCommand}" Content="Kaydet" />
+                            <Button Grid.Column="4" Style="{StaticResource DangerButton}" Command="{Binding DeleteCommand}" Content="Sil veya Pasif Yap" />
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
