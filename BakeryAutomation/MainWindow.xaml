@@ -11,7 +11,7 @@
         MinWidth="1320"
         MinHeight="860"
         WindowStartupLocation="CenterScreen"
-        Icon="pack://application:,,,/Resources/Images/logo.png"
+        Icon="pack://application:,,,/Resources/Images/app-icon.ico"
         Background="{DynamicResource BackgroundBrush}"
         Foreground="{DynamicResource TextBrush}">
 

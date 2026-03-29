@@ -7,9 +7,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>BakeryAutomation</AssemblyName>
     <RootNamespace>BakeryAutomation</RootNamespace>
+    <ApplicationIcon>Resources\Images\app-icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\app-icon.ico" />
     <Resource Include="Resources\Images\logo.png" />
   </ItemGroup>
 
