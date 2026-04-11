@@ -159,7 +159,7 @@
                             <DataGridTextColumn Header="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Product]}" Binding="{Binding ProductName}" Width="*" IsReadOnly="True" />
                             <DataGridTextColumn Header="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Unit]}" Binding="{Binding UnitTypeDisplay, Mode=OneWay}" Width="80" IsReadOnly="True" />
                             <DataGridTextColumn Header="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Sent]}" Binding="{Binding QuantitySent, UpdateSourceTrigger=PropertyChanged}" Width="90" />
-                            <DataGridTextColumn Header="Ayni Fis Iade" Binding="{Binding QuantityReturned, UpdateSourceTrigger=PropertyChanged}" Width="110" />
+                            <DataGridTextColumn Header="Ayni Fis Iade" Binding="{Binding QuantityReturned, UpdateSourceTrigger=PropertyChanged}" Width="135" />
                             <DataGridTextColumn Header="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Wasted]}" Binding="{Binding QuantityWasted, UpdateSourceTrigger=PropertyChanged}" Width="80" />
                             <DataGridTextColumn Header="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[UnitPrice]}" Binding="{Binding UnitPrice, UpdateSourceTrigger=PropertyChanged}" Width="90" />
                             <DataGridTextColumn Header="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Discount]}" Binding="{Binding ItemDiscountPercent, UpdateSourceTrigger=PropertyChanged}" Width="90" />

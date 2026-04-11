@@ -8,13 +8,15 @@
         Title="Firin Otomasyon"
         Width="1240"
         Height="720"
-        MinWidth="980"
-        MinHeight="620"
+        MinWidth="840"
+        MinHeight="500"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Icon="pack://application:,,,/Resources/Images/app-icon.ico"
         Background="{DynamicResource BackgroundBrush}"
-        Foreground="{DynamicResource TextBrush}">
+        Foreground="{DynamicResource TextBrush}"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True">
 
     <Window.DataContext>
         <vm:MainViewModel />

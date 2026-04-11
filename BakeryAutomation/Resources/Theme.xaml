@@ -401,6 +401,12 @@
         </Setter>
     </Style>
 
+    <DataTemplate x:Key="WrappedDataGridHeaderTemplate">
+        <TextBlock Text="{Binding}"
+                   TextWrapping="Wrap"
+                   TextAlignment="Left" />
+    </DataTemplate>
+
     <Style TargetType="DataGrid">
         <Setter Property="AutoGenerateColumns" Value="False" />
         <Setter Property="CanUserAddRows" Value="False" />
@@ -414,15 +420,37 @@
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Margin" Value="0,0,0,8" />
+        <Setter Property="MinColumnWidth" Value="72" />
+        <Setter Property="RowHeaderWidth" Value="0" />
+        <Setter Property="EnableColumnVirtualization" Value="True" />
+        <Setter Property="EnableRowVirtualization" Value="True" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="ColumnHeaderStyle">
             <Setter.Value>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
                     <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}" />
-                    <Setter Property="Padding" Value="10,8" />
+                    <Setter Property="Padding" Value="10,10" />
                     <Setter Property="BorderThickness" Value="0,0,0,1" />
                     <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
                     <Setter Property="FontWeight" Value="SemiBold" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="MinHeight" Value="42" />
+                    <Setter Property="ContentTemplate" Value="{StaticResource WrappedDataGridHeaderTemplate}" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CellStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Padding" Value="10,6" />
+                    <Setter Property="TextBlock.TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="TextBlock.TextWrapping" Value="NoWrap" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
                 </Style>
             </Setter.Value>
         </Setter>

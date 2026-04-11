@@ -157,7 +157,7 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Cari" Binding="{Binding BranchName}" Width="*" />
                                 <DataGridTextColumn Header="Tip" Binding="{Binding TypeDisplay}" Width="90" />
-                                <DataGridTextColumn Header="Vade / Tahsilat" Binding="{Binding TermsDisplay}" Width="190" />
+                                <DataGridTextColumn Header="Vade / Tahsilat" Binding="{Binding TermsDisplay}" Width="200" />
                                 <DataGridTextColumn Header="Devreden" Binding="{Binding OpeningBalance, StringFormat={}{0:n2}}" Width="110" />
                                 <DataGridTextColumn Header="Sevkiyat" Binding="{Binding ShipmentAmount, StringFormat={}{0:n2}}" Width="110" />
                                 <DataGridTextColumn Header="Iade" Binding="{Binding ReturnAmount, StringFormat={}{0:n2}}" Width="110" />
@@ -210,12 +210,12 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tarih" Binding="{Binding Date, StringFormat={}{0:yyyy-MM-dd}}" Width="120" />
                             <DataGridTextColumn Header="Devreden" Binding="{Binding OpeningBalance, StringFormat={}{0:n2}}" Width="110" />
-                            <DataGridTextColumn Header="Fis Adedi" Binding="{Binding ShipmentCount}" Width="80" />
+                            <DataGridTextColumn Header="Fis Adedi" Binding="{Binding ShipmentCount}" Width="90" />
                             <DataGridTextColumn Header="Sevkiyat" Binding="{Binding ShipmentAmount, StringFormat={}{0:n2}}" Width="110" />
-                            <DataGridTextColumn Header="Iade Adedi" Binding="{Binding ReturnCount}" Width="85" />
+                            <DataGridTextColumn Header="Iade Adedi" Binding="{Binding ReturnCount}" Width="95" />
                             <DataGridTextColumn Header="Iade" Binding="{Binding ReturnAmount, StringFormat={}{0:n2}}" Width="110" />
                             <DataGridTextColumn Header="Net Ciro" Binding="{Binding NetRevenue, StringFormat={}{0:n2}}" Width="110" />
-                            <DataGridTextColumn Header="Tahsilat Adedi" Binding="{Binding PaymentCount}" Width="100" />
+                            <DataGridTextColumn Header="Tahsilat Adedi" Binding="{Binding PaymentCount}" Width="120" />
                             <DataGridTextColumn Header="Tahsilat" Binding="{Binding Payments, StringFormat={}{0:n2}}" Width="110" />
                             <DataGridTextColumn Header="Gun Sonu" Binding="{Binding ClosingBalance, StringFormat={}{0:n2}}" Width="110" />
                         </DataGrid.Columns>
@@ -236,7 +236,7 @@
                             <DataGridTextColumn Header="Tarih" Binding="{Binding Date, StringFormat={}{0:yyyy-MM-dd}}" Width="120" />
                             <DataGridTextColumn Header="Cari" Binding="{Binding BranchName}" Width="180" />
                             <DataGridTextColumn Header="Islem" Binding="{Binding TransactionType}" Width="110" />
-                            <DataGridTextColumn Header="Belge / Ref" Binding="{Binding DocumentNo}" Width="130" />
+                            <DataGridTextColumn Header="Belge / Ref" Binding="{Binding DocumentNo}" Width="140" />
                             <DataGridTextColumn Header="Aciklama" Binding="{Binding Description}" Width="*" />
                             <DataGridTextColumn Header="Borc" Binding="{Binding Debt, StringFormat={}{0:n2}}" Width="100" Foreground="#FFDC2626" />
                             <DataGridTextColumn Header="Alacak" Binding="{Binding Credit, StringFormat={}{0:n2}}" Width="100" Foreground="#FF059669" />

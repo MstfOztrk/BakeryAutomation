@@ -40,7 +40,7 @@
                             <DataGridTextColumn Header="Bakiye" Binding="{Binding Balance, StringFormat={}{0:n2}}" Width="120" />
                             <DataGridTextColumn Header="Vade" Binding="{Binding TermsSummary}" Width="140" />
                             <DataGridTextColumn Header="Kredi" Binding="{Binding CreditStatus}" Width="130" />
-                            <DataGridTextColumn Header="Sonraki Tahsilat" Binding="{Binding NextCollectionDateText}" Width="130" />
+                            <DataGridTextColumn Header="Sonraki Tahsilat" Binding="{Binding NextCollectionDateText}" Width="150" />
                             <DataGridCheckBoxColumn Header="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Active]}" Binding="{Binding IsActive, Mode=OneWay}" Width="60" />
                         </DataGrid.Columns>
                     </DataGrid>

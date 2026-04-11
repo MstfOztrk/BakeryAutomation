@@ -162,7 +162,7 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Tarih" Binding="{Binding Date, StringFormat={}{0:yyyy-MM-dd}}" Width="120" />
                                 <DataGridTextColumn Header="Fis No" Binding="{Binding BatchNo}" Width="160" />
-                                <DataGridTextColumn Header="Fis Tutari" Binding="{Binding Total, StringFormat={}{0:n2}}" Width="120" />
+                                <DataGridTextColumn Header="Fis Tutari" Binding="{Binding Total, StringFormat={}{0:n2}}" Width="130" />
                                 <DataGridTextColumn Header="Iade" Binding="{Binding Returns, StringFormat={}{0:n2}}" Width="100" />
                                 <DataGridTextColumn Header="Alinan" Binding="{Binding Paid, StringFormat={}{0:n2}}" Width="110" />
                                 <DataGridTextColumn Header="Kalan" Binding="{Binding Remaining, StringFormat={}{0:n2}}" Width="120" />
@@ -189,7 +189,7 @@
                                 <DataGridTextColumn Header="Tip" Binding="{Binding KindDisplay}" Width="100" />
                                 <DataGridTextColumn Header="Fis No" Binding="{Binding ShipmentDisplay}" Width="140" />
                                 <DataGridTextColumn Header="Tutar" Binding="{Binding Payment.Amount, StringFormat={}{0:n2}}" Width="120" />
-                                <DataGridTextColumn Header="Yontem" Binding="{Binding MethodDisplay}" Width="130" />
+                                <DataGridTextColumn Header="Yontem" Binding="{Binding MethodDisplay}" Width="140" />
                                 <DataGridTextColumn Header="Aciklama" Binding="{Binding Payment.Note}" Width="*" />
                             </DataGrid.Columns>
                         </DataGrid>
