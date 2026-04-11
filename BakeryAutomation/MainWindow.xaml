@@ -6,11 +6,12 @@
         xmlns:vm="clr-namespace:BakeryAutomation.ViewModels"
         mc:Ignorable="d"
         Title="Firin Otomasyon"
-        Width="1480"
-        Height="980"
-        MinWidth="1320"
-        MinHeight="860"
+        Width="1240"
+        Height="720"
+        MinWidth="980"
+        MinHeight="620"
         WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
         Icon="pack://application:,,,/Resources/Images/app-icon.ico"
         Background="{DynamicResource BackgroundBrush}"
         Foreground="{DynamicResource TextBrush}">
@@ -48,16 +49,19 @@
                     </StackPanel>
                 </Border>
 
-                <StackPanel>
-                    <ToggleButton Style="{StaticResource SidebarNavButton}" IsChecked="{Binding IsDashboardSelected}" Command="{Binding ShowDashboardCommand}" Content="Dashboard" />
-                    <ToggleButton Style="{StaticResource SidebarNavButton}" IsChecked="{Binding IsProductsSelected}" Command="{Binding ShowProductsCommand}" Content="Urunler" />
-                    <ToggleButton Style="{StaticResource SidebarNavButton}" IsChecked="{Binding IsBranchesSelected}" Command="{Binding ShowBranchesCommand}" Content="Subeler / Cariler" />
-                    <ToggleButton Style="{StaticResource SidebarNavButton}" IsChecked="{Binding IsShipmentsSelected}" Command="{Binding ShowShipmentsCommand}" Content="Sevkiyat" />
-                    <ToggleButton Style="{StaticResource SidebarNavButton}" IsChecked="{Binding IsPaymentsSelected}" Command="{Binding ShowPaymentsCommand}" Content="Tahsilat" />
-                    <ToggleButton Style="{StaticResource SidebarNavButton}" IsChecked="{Binding IsReturnsSelected}" Command="{Binding ShowReturnsCommand}" Content="Iadeler" />
-                    <ToggleButton Style="{StaticResource SidebarNavButton}" IsChecked="{Binding IsReportsSelected}" Command="{Binding ShowReportsCommand}" Content="Raporlar" />
-                    <ToggleButton Style="{StaticResource SidebarNavButton}" IsChecked="{Binding IsSettingsSelected}" Command="{Binding ShowSettingsCommand}" Content="Ayarlar" />
-                </StackPanel>
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel>
+                        <ToggleButton Style="{StaticResource SidebarNavButton}" IsChecked="{Binding IsDashboardSelected}" Command="{Binding ShowDashboardCommand}" Content="Dashboard" />
+                        <ToggleButton Style="{StaticResource SidebarNavButton}" IsChecked="{Binding IsProductsSelected}" Command="{Binding ShowProductsCommand}" Content="Urunler" />
+                        <ToggleButton Style="{StaticResource SidebarNavButton}" IsChecked="{Binding IsBranchesSelected}" Command="{Binding ShowBranchesCommand}" Content="Subeler / Cariler" />
+                        <ToggleButton Style="{StaticResource SidebarNavButton}" IsChecked="{Binding IsShipmentsSelected}" Command="{Binding ShowShipmentsCommand}" Content="Sevkiyat" />
+                        <ToggleButton Style="{StaticResource SidebarNavButton}" IsChecked="{Binding IsPaymentsSelected}" Command="{Binding ShowPaymentsCommand}" Content="Tahsilat" />
+                        <ToggleButton Style="{StaticResource SidebarNavButton}" IsChecked="{Binding IsReturnsSelected}" Command="{Binding ShowReturnsCommand}" Content="Iadeler" />
+                        <ToggleButton Style="{StaticResource SidebarNavButton}" IsChecked="{Binding IsReportsSelected}" Command="{Binding ShowReportsCommand}" Content="Raporlar" />
+                        <ToggleButton Style="{StaticResource SidebarNavButton}" IsChecked="{Binding IsSettingsSelected}" Command="{Binding ShowSettingsCommand}" Content="Ayarlar" />
+                    </StackPanel>
+                </ScrollViewer>
 
             </DockPanel>
         </Border>

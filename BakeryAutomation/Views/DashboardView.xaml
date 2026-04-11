@@ -2,8 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel>
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Auto"
+                  CanContentScroll="False">
+        <StackPanel MinWidth="1120">
             <TextBlock Text="Genel Bakis" FontSize="22" FontWeight="SemiBold" Margin="0,0,0,4" />
             <TextBlock Text="Bugunun ozetini buradan izleyin."
                        Foreground="{DynamicResource TextMutedBrush}"

@@ -16,11 +16,15 @@
                        Margin="0,4,0,0" />
         </StackPanel>
 
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="560" />
-            </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Row="1"
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Disabled"
+                      CanContentScroll="False">
+            <Grid MinWidth="1180">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="560" />
+                </Grid.ColumnDefinitions>
 
             <Border Style="{StaticResource CardBorder}" Margin="0,0,12,0">
                 <DockPanel>
@@ -215,6 +219,7 @@
                     </StackPanel>
                 </ScrollViewer>
             </Border>
-        </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

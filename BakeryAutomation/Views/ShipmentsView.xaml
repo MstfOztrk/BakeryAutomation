@@ -16,12 +16,16 @@
                        Margin="0,4,0,0" />
         </StackPanel>
 
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="380" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="370" />
-            </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Row="1"
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Disabled"
+                      CanContentScroll="False">
+            <Grid MinWidth="1180">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="380" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="370" />
+                </Grid.ColumnDefinitions>
 
             <Border Style="{StaticResource CardBorder}" Margin="0,0,12,0">
                 <DockPanel>
@@ -193,113 +197,117 @@
             </Border>
 
             <Border Grid.Column="2" Style="{StaticResource CardBorder}">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
-                        <TextBlock Text="{Binding BatchEditorTitle}" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10" />
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              CanContentScroll="False">
+                    <StackPanel Margin="0,0,0,12">
+                            <TextBlock Text="{Binding BatchEditorTitle}" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10" />
 
-                        <Border Background="{DynamicResource BackgroundBrush}" CornerRadius="10" Padding="12" Margin="0,0,0,12">
-                            <TextBlock Text="{Binding BatchEditorHint}"
+                            <Border Background="{DynamicResource BackgroundBrush}" CornerRadius="10" Padding="12" Margin="0,0,0,12">
+                                <TextBlock Text="{Binding BatchEditorHint}"
+                                           Foreground="{DynamicResource TextMutedBrush}"
+                                           TextWrapping="Wrap" />
+                            </Border>
+
+                            <TextBlock Text="{Binding BatchStatusText}"
                                        Foreground="{DynamicResource TextMutedBrush}"
-                                       TextWrapping="Wrap" />
-                        </Border>
+                                       Margin="0,0,0,10" />
 
-                        <TextBlock Text="{Binding BatchStatusText}"
-                                   Foreground="{DynamicResource TextMutedBrush}"
-                                   Margin="0,0,0,10" />
+                            <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[ShipmentNo]}" Foreground="{DynamicResource TextMutedBrush}" />
+                            <TextBox Text="{Binding BatchNo, UpdateSourceTrigger=PropertyChanged}" />
 
-                        <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[ShipmentNo]}" Foreground="{DynamicResource TextMutedBrush}" />
-                        <TextBox Text="{Binding BatchNo, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Date]}" Foreground="{DynamicResource TextMutedBrush}" />
+                            <DatePicker SelectedDate="{Binding Date}" />
 
-                        <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Date]}" Foreground="{DynamicResource TextMutedBrush}" />
-                        <DatePicker SelectedDate="{Binding Date}" />
+                            <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Branch]}" Foreground="{DynamicResource TextMutedBrush}" />
+                            <ComboBox ItemsSource="{Binding Branches}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding BranchId}" />
 
-                        <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Branch]}" Foreground="{DynamicResource TextMutedBrush}" />
-                        <ComboBox ItemsSource="{Binding Branches}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding BranchId}" />
+                            <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Discount]}" Foreground="{DynamicResource TextMutedBrush}" />
+                            <TextBox Text="{Binding BatchDiscountPercent, UpdateSourceTrigger=PropertyChanged}" />
 
-                        <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Discount]}" Foreground="{DynamicResource TextMutedBrush}" />
-                        <TextBox Text="{Binding BatchDiscountPercent, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Note]}" Foreground="{DynamicResource TextMutedBrush}" />
+                            <TextBox Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" Height="78" />
 
-                        <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Note]}" Foreground="{DynamicResource TextMutedBrush}" />
-                        <TextBox Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" Height="78" />
+                            <TextBlock Text="{Binding SaveBatchFeedback}"
+                                       Foreground="#86EFAC"
+                                       FontWeight="SemiBold"
+                                       Margin="0,10,0,4">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding HasSaveBatchFeedback}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
 
-                        <TextBlock Text="{Binding SaveBatchFeedback}"
-                                   Foreground="#86EFAC"
-                                   FontWeight="SemiBold"
-                                   Margin="0,10,0,4">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Visibility" Value="Collapsed" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding HasSaveBatchFeedback}" Value="True">
-                                            <Setter Property="Visibility" Value="Visible" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
+                            <Button Command="{Binding SaveBatchCommand}"
+                                    Content="{Binding SaveBatchButtonText}"
+                                    Width="140"
+                                    HorizontalAlignment="Left"
+                                    Margin="0,10,0,0">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsSaveBatchSuccessActive}" Value="True">
+                                                <Setter Property="Background" Value="#16A34A" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
 
-                        <Button Command="{Binding SaveBatchCommand}"
-                                Content="{Binding SaveBatchButtonText}"
-                                Width="140"
-                                HorizontalAlignment="Left"
-                                Margin="0,10,0,0">
-                            <Button.Style>
-                                <Style TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsSaveBatchSuccessActive}" Value="True">
-                                            <Setter Property="Background" Value="#16A34A" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
+                            <Separator Margin="0,10,0,10" />
+                            <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[AddToShipment]}" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,6" />
 
-                        <Separator Margin="0,10,0,10" />
-                        <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[AddToShipment]}" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,6" />
+                            <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Product]}" Foreground="{DynamicResource TextMutedBrush}" />
+                            <ComboBox ItemsSource="{Binding Products}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding NewProductId}" />
 
-                        <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Product]}" Foreground="{DynamicResource TextMutedBrush}" />
-                        <ComboBox ItemsSource="{Binding Products}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding NewProductId}" />
+                            <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Sent]}" Foreground="{DynamicResource TextMutedBrush}" />
+                            <TextBox Text="{Binding NewQtySent, UpdateSourceTrigger=PropertyChanged}" />
 
-                        <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Sent]}" Foreground="{DynamicResource TextMutedBrush}" />
-                        <TextBox Text="{Binding NewQtySent, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[UnitPrice]}" Foreground="{DynamicResource TextMutedBrush}" />
+                            <TextBox Text="{Binding NewUnitPrice, UpdateSourceTrigger=PropertyChanged}" />
 
-                        <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[UnitPrice]}" Foreground="{DynamicResource TextMutedBrush}" />
-                        <TextBox Text="{Binding NewUnitPrice, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Discount]}" Foreground="{DynamicResource TextMutedBrush}" />
+                            <TextBox Text="{Binding NewItemDiscountPercent, UpdateSourceTrigger=PropertyChanged}" />
 
-                        <TextBlock Text="{Binding Source={x:Static services:LocalizationService.Instance}, Path=[Discount]}" Foreground="{DynamicResource TextMutedBrush}" />
-                        <TextBox Text="{Binding NewItemDiscountPercent, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Text="{Binding ItemAddFeedback}"
+                                       Foreground="#86EFAC"
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"
+                                       Margin="0,10,0,4">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding HasItemAddFeedback}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
 
-                        <TextBlock Text="{Binding ItemAddFeedback}"
-                                   Foreground="#86EFAC"
-                                   FontWeight="SemiBold"
-                                   TextWrapping="Wrap"
-                                   Margin="0,10,0,4">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Visibility" Value="Collapsed" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding HasItemAddFeedback}" Value="True">
-                                            <Setter Property="Visibility" Value="Visible" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-
-                        <Button Command="{Binding AddItemCommand}" Content="{Binding AddItemButtonText}">
-                            <Button.Style>
-                                <Style TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsItemAddSuccessActive}" Value="True">
-                                            <Setter Property="Background" Value="#16A34A" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                    </StackPanel>
+                            <Button Command="{Binding AddItemCommand}"
+                                    Content="{Binding AddItemButtonText}"
+                                    Margin="0,12,0,4">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsItemAddSuccessActive}" Value="True">
+                                                <Setter Property="Background" Value="#16A34A" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </StackPanel>
                 </ScrollViewer>
             </Border>
-        </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:services="clr-namespace:BakeryAutomation.Services">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel>
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Auto"
+                  CanContentScroll="False">
+        <StackPanel MinWidth="920">
             <TextBlock Text="Ayarlar" FontSize="22" FontWeight="SemiBold" Margin="0,0,0,12" />
 
             <Border Style="{StaticResource CardBorder}">
